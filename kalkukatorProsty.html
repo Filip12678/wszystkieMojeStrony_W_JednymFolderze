@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        
+        <title>Kalkulator prosty</title>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script>
+            
+            function calc()
+            {
+			
+				function zamianaRadianowNaStopnie(wartosc_w_Radianach) {
+				wartosc_w_Stopniach = (wartosc_w_Radianach * Math.PI) / 180;
+				return wartosc_w_Stopniach;
+				}
+				
+				function zamianaRadianowNaStopnieDlaFunkcjiOdrotnych(wartosc_w_Radianach) {
+				wartosc_w_Stopniach = (wartosc_w_Radianach * 180) / Math.PI;
+				return wartosc_w_Stopniach;
+				}
+				
+				
+                var n1 = parseFloat(document.getElementById('n1').value);
+                var n2 = parseFloat(document.getElementById('n2').value);
+                
+                var oper = document.getElementById('operators').value;
+                
+                if(oper === '+')
+                {
+                    var wynik = n1+n2;
+					wynik = Math.round(wynik * 100000000000000) / 100000000000000;
+                    document.getElementById('result').value = wynik;
+                }
+                
+                if(oper === '-')
+                {
+                    var wynik = n1-n2;
+					wynik = Math.round(wynik * 100000000000000) / 100000000000000;
+                    document.getElementById('result').value = wynik;
+                }
+                
+                if(oper === '/')
+                {
+				    var wynik = n1/n2;
+					wynik = Math.round(wynik * 100000000000000) / 100000000000000;
+                    document.getElementById('result').value = wynik;
+                }
+                
+                if(oper === 'X')
+                {
+					var wynik = n1*n2;
+					wynik = Math.round(wynik * 100000000000000) / 100000000000000;
+                    document.getElementById('result').value = wynik;
+                }
+				if(oper === '%')
+                {
+					var reszta_Z_Dzielenia = n1%n2
+					var wynikDzielenia = parseInt(n1/n2)
+                    document.getElementById('result').value = `${wynikDzielenia} reszta ${reszta_Z_Dzielenia}`;
+                }
+				if(oper === '^')
+                {
+					var wynik = wynik = Math.pow(n1, n2);
+					wynik = Math.round(wynik * 100000000000000) / 100000000000000;
+                    document.getElementById('result').value = wynik;
+                }
+				if(oper === 'pierwiastkowanie')
+                {
+					var wynik = wynik = Math.pow(n1, 1/n2);
+					wynik = Math.round(wynik * 100000000000000) / 100000000000000;
+                    document.getElementById('result').value = wynik;
+                }
+				
+				if(oper === 'sinus')
+                {
+					n1 = zamianaRadianowNaStopnie(n1);
+					wynik = Math.sin(n1);
+					document.getElementById('result').value = wynik;
+                }
+				
+				if(oper === 'sinus-1')
+                {
+					wynik = Math.asin(n1);
+					wynik = zamianaRadianowNaStopnieDlaFunkcjiOdrotnych(wynik);
+					document.getElementById('result').value = wynik;
+                }
+				
+				if(oper === 'cosinus')
+                {
+					n1 = zamianaRadianowNaStopnie(n1);
+					wynik = Math.cos(n1);
+					document.getElementById('result').value = wynik;
+                }
+				
+				if(oper === 'cosinus-1')
+                {
+					wynik = Math.acos(n1);
+					wynik = zamianaRadianowNaStopnieDlaFunkcjiOdrotnych(wynik);
+					document.getElementById('result').value = wynik;
+                }
+				
+				if(oper === 'tangens')
+                {
+					n1 = zamianaRadianowNaStopnie(n1);
+					wynik = Math.tan(n1);
+					document.getElementById('result').value = wynik;
+                }
+				
+				if(oper === 'tangens-1')
+                {
+					wynik = Math.atan(n1);
+					wynik = zamianaRadianowNaStopnieDlaFunkcjiOdrotnych(wynik);
+					document.getElementById('result').value = wynik;
+                }
+				
+            }
+			
+			function kopiuj() {
+			navigator.clipboard.writeText(result.value);
+			}
+            
+        </script>
+        
+    </head>
+    <body>
+        
+        <input type="text" id="n1"/><br/><br/>
+        <input type="text" id="n2"/><br/><br/>
+        
+        <select id="operators">
+            <option value="+">Dodawanie</option>
+            <option value="-">Odejmowanie</option>
+            <option value="/">Dzielenie</option>
+            <option value="X">Mnożenie</option>
+			<option value="%">Dzielenie z resztą</option>
+			<option value="^">Potęgowanie</option>
+			<option value="pierwiastkowanie">Pierwiastkowanie</option>
+			<option value="sinus">Sinus</option>
+			<option value="sinus-1">Sinus -1</option>
+			<option value="cosinus">Cosinus</option>
+			<option value="cosinus-1">Cosinus -1</option>
+			<option value="tangens">Tangens</option>
+			<option value="tangens-1">Tangens -1</option>
+        </select>
+        
+        <button onclick="calc();">=</button>
+        <input type="text" id="result" readonly/>  <button onclick="kopiuj();">Kopiuj wynik</button>
+        
+    </body>
+</html>
